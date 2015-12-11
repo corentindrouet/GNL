@@ -6,7 +6,7 @@
 /*   By: cdrouet <cdrouet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 08:51:06 by cdrouet           #+#    #+#             */
-/*   Updated: 2015/12/11 10:18:24 by cdrouet          ###   ########.fr       */
+/*   Updated: 2015/12/11 13:05:03 by cdrouet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 int		main(int argc, char **argv)
 {
 	int		fd;
+	int		fd2;
 	char	*ptr;
 
 	if (argc >= 2)
@@ -25,13 +26,33 @@ int		main(int argc, char **argv)
 		if ((ptr = (char*)malloc(sizeof(char)* 100)) == NULL)
 			return (0);
 		fd = open(argv[1], O_RDWR);
-		while (get_next_line(fd, &ptr) > 0)
-		{
+		fd2 = open(argv[2], O_RDWR);
+		get_next_line(fd, &ptr);
 			ft_putchar('|');
 			ft_putstr(ptr);
 			ft_putchar('|');
-		}
+		get_next_line(fd2, &ptr);
+			ft_putchar('|');
+			ft_putstr(ptr);
+			ft_putchar('|');
+		get_next_line(fd, &ptr);
+			ft_putchar('|');
+			ft_putstr(ptr);
+			ft_putchar('|');
+		get_next_line(fd2, &ptr);
+			ft_putchar('|');
+			ft_putstr(ptr);
+			ft_putchar('|');
+		get_next_line(fd2, &ptr);
+			ft_putchar('|');
+			ft_putstr(ptr);
+			ft_putchar('|');
+		get_next_line(fd, &ptr);
+			ft_putchar('|');
+			ft_putstr(ptr);
+			ft_putchar('|');
 		close(fd);
+		close(fd2);
 		free(ptr);
 	}
 	if (argc == 1)
