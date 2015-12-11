@@ -6,7 +6,7 @@
 /*   By: cdrouet <cdrouet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 08:51:06 by cdrouet           #+#    #+#             */
-/*   Updated: 2015/12/10 15:08:52 by cdrouet          ###   ########.fr       */
+/*   Updated: 2015/12/11 10:18:24 by cdrouet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int		main(int argc, char **argv)
 	int		fd;
 	char	*ptr;
 
-	if (argc == 2)
+	if (argc >= 2)
 	{
 		if ((ptr = (char*)malloc(sizeof(char)* 100)) == NULL)
 			return (0);

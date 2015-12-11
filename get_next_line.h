@@ -6,7 +6,7 @@
 /*   By: cdrouet <cdrouet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 08:41:13 by cdrouet           #+#    #+#             */
-/*   Updated: 2015/12/10 16:10:21 by cdrouet          ###   ########.fr       */
+/*   Updated: 2015/12/11 10:17:47 by cdrouet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include "libft.h"
-# define BUFF_SIZE 8
-# define INTJ()	int	j[2] = {-1, -1}
+# define BUFF_SIZE 2
 
 int				get_next_line(int const fd, char **line);
 int				verif_end(int *i, char **c);
