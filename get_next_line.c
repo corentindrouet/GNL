@@ -6,7 +6,7 @@
 /*   By: cdrouet <cdrouet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 08:40:55 by cdrouet           #+#    #+#             */
-/*   Updated: 2015/12/11 13:34:45 by cdrouet          ###   ########.fr       */
+/*   Updated: 2015/12/14 08:36:55 by cdrouet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 
 int				get_next_line(int const fd, char **line)
 {
-	static char	*c[5] = {NULL, NULL, NULL, NULL, NULL};
+	static char	*c[8] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
 	int			j[4];
 
 	j[0] = -1;
 	j[1] = -1;
 	j[3] = search_index(c, fd);
-	ft_putnbr(j[3]);
 	if (c[j[3]] == NULL)
 	{
 		c[j[3]] = (char*)malloc(sizeof(char) * (BUFF_SIZE + 3));
@@ -48,16 +47,18 @@ int				search_index(char **c, int fd)
 	int	j;
 
 	j = -1;
-	while (++j < 5)
+	while (++j < 10)
 	{
 		if (c[j] != NULL)
 		{
 			if (c[j][BUFF_SIZE + 2] == fd)
 				return (j);
 		}
-		else
-			return (j);
 	}
+	j = -1;
+	while (++j < 5)
+		if (c[j] == NULL)
+			return (j);
 	return (j);
 }
 
@@ -82,8 +83,8 @@ int				verif_end(int *i, char **c)
 	}
 	else if (c[i[3]][i[1]] == '\n' && c[i[3]][i[1] + 1] != '\0')
 	{
-		ft_memcpy(c[i[3]], &c[i[3]][i[1] + 1], BUFF_SIZE);
-		c[i[3]][BUFF_SIZE - i[1] - 1] = '\0';
+		ft_memcpy(c[i[3]], &c[i[3]][i[1] + 1], BUFF_SIZE + 2);
+		c[i[3]][BUFF_SIZE - i[1]] = '\0';
 		return (2);
 	}
 	else if (c[i[3]][i[1]] == '\n' && c[i[3]][i[1] + 1] == '\0')
