@@ -6,7 +6,7 @@
 /*   By: cdrouet <cdrouet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 08:40:55 by cdrouet           #+#    #+#             */
-/*   Updated: 2015/12/14 08:36:55 by cdrouet          ###   ########.fr       */
+/*   Updated: 2015/12/14 08:54:48 by cdrouet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@ int				get_next_line(int const fd, char **line)
 	static char	*c[8] = {NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL};
 	int			j[4];
 
-	j[0] = -1;
-	j[1] = -1;
+	init_j(j);
 	j[3] = search_index(c, fd);
 	if (c[j[3]] == NULL)
 	{
@@ -40,6 +39,14 @@ int				get_next_line(int const fd, char **line)
 	if ((j[2] = verif_end(j, c)) == 1)
 		return (0);
 	return (1);
+}
+
+void			init_j(int *j)
+{
+	j[0] = -1;
+	j[1] = -1;
+	j[2] = -1;
+	j[3] = -1;
 }
 
 int				search_index(char **c, int fd)
