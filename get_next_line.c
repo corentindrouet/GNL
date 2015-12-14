@@ -6,7 +6,7 @@
 /*   By: cdrouet <cdrouet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 08:40:55 by cdrouet           #+#    #+#             */
-/*   Updated: 2015/12/14 09:00:47 by cdrouet          ###   ########.fr       */
+/*   Updated: 2015/12/14 09:05:16 by cdrouet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int				search_index(char **c, int fd)
 	int	j;
 
 	j = -1;
-	while (++j < 10)
+	while (++j < 20)
 	{
 		if (c[j] != NULL)
 		{
