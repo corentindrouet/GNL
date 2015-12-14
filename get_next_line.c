@@ -6,7 +6,7 @@
 /*   By: cdrouet <cdrouet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 08:40:55 by cdrouet           #+#    #+#             */
-/*   Updated: 2015/12/14 09:05:16 by cdrouet          ###   ########.fr       */
+/*   Updated: 2015/12/14 16:29:59 by cdrouet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int				get_next_line(int const fd, char **line)
 	int			j[4];
 
 	init_j(j);
+	if (fd <= 0 || line == NULL || BUFF_SIZE <= 0)
+		return (-1);
 	j[3] = search_index(c, fd);
 	if (c[j[3]] == NULL)
 	{
@@ -25,27 +27,25 @@ int				get_next_line(int const fd, char **line)
 		if ((j[2] = read_gnl(c[j[3]], fd)) <= 0)
 			return (j[2]);
 	}
-	while (c[j[3]][++j[1]] != '\n' && c[j[3]][j[1]])
+	*line = ft_strnew(1);
+	while (j[2] > 0 && ft_strchr(c[j[3]], '\n') == NULL)
 	{
-		(*line)[++j[0]] = c[j[3]][j[1]];
-		if (c[j[3]][j[1] + 1] == '\0')
-		{
-			if ((j[2] = read_gnl(c[j[3]], fd)) <= 0)
-				return (j[2]);
-			j[1] = -1;
-		}
+		*line = ft_strjoin(*line, c[j[3]]);
+		if ((j[2] = read_gnl(c[j[3]], fd)) < 0)
+			return (j[2]);
 	}
-	(*line)[++j[0]] = '\0';
-	if ((j[2] = verif_end(j, c)) == 1)
-		return (0);
-	return (1);
+	while (c[j[3]][j[1]] != '\n' && c[j[3]][j[1]])
+		j[1]++;
+	if (j[2] > 0)
+		*line = ft_strjoin(*line, ft_strsub(c[j[3]], 0, j[1]));
+	return (verif_end(j, c));
 }
 
 void			init_j(int *j)
 {
 	j[0] = -1;
-	j[1] = -1;
-	j[2] = -1;
+	j[1] = 0;
+	j[2] = 1;
 	j[3] = -1;
 }
 
@@ -63,7 +63,7 @@ int				search_index(char **c, int fd)
 		}
 	}
 	j = -1;
-	while (++j < 5)
+	while (++j < 20)
 		if (c[j] == NULL)
 			return (j);
 	return (j);
@@ -86,21 +86,19 @@ int				verif_end(int *i, char **c)
 	{
 		free(c[i[3]]);
 		c[i[3]] = NULL;
-		return (1);
+		return (0);
 	}
 	else if (c[i[3]][i[1]] == '\n' && c[i[3]][i[1] + 1] != '\0')
 	{
 		ft_memcpy(c[i[3]], &c[i[3]][i[1] + 1], BUFF_SIZE + 2);
 		c[i[3]][BUFF_SIZE - i[1]] = '\0';
-		return (2);
+		return (1);
 	}
 	else if (c[i[3]][i[1]] == '\n' && c[i[3]][i[1] + 1] == '\0')
 	{
 		free(c[i[3]]);
 		c[i[3]] = NULL;
-		return (0);
-	}
-	if (c[i[3]] == NULL)
 		return (1);
+	}
 	return (-1);
 }
