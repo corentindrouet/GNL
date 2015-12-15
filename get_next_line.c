@@ -6,7 +6,7 @@
 /*   By: cdrouet <cdrouet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 08:40:55 by cdrouet           #+#    #+#             */
-/*   Updated: 2015/12/14 16:29:59 by cdrouet          ###   ########.fr       */
+/*   Updated: 2015/12/15 08:39:31 by cdrouet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void			init_j(int *j)
 {
 	j[0] = -1;
 	j[1] = 0;
-	j[2] = 1;
+	j[2] = BUFF_SIZE;
 	j[3] = -1;
 }
 
@@ -82,23 +82,11 @@ int				read_gnl(char *c, int fd)
 
 int				verif_end(int *i, char **c)
 {
-	if (c[i[3]][i[1]] == '\0')
-	{
-		free(c[i[3]]);
-		c[i[3]] = NULL;
-		return (0);
-	}
-	else if (c[i[3]][i[1]] == '\n' && c[i[3]][i[1] + 1] != '\0')
+	if (c[i[3]][i[1]] == '\n')
 	{
 		ft_memcpy(c[i[3]], &c[i[3]][i[1] + 1], BUFF_SIZE + 2);
 		c[i[3]][BUFF_SIZE - i[1]] = '\0';
 		return (1);
 	}
-	else if (c[i[3]][i[1]] == '\n' && c[i[3]][i[1] + 1] == '\0')
-	{
-		free(c[i[3]]);
-		c[i[3]] = NULL;
-		return (1);
-	}
-	return (-1);
+	return (0);
 }

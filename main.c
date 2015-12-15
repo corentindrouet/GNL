@@ -6,7 +6,7 @@
 /*   By: cdrouet <cdrouet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/12/09 08:51:06 by cdrouet           #+#    #+#             */
-/*   Updated: 2015/12/14 16:30:01 by cdrouet          ###   ########.fr       */
+/*   Updated: 2015/12/15 08:13:49 by cdrouet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,44 @@
 int		main(int argc, char **argv)
 {
 	int		fd;
+	int		i;
 	char	*ptr;
 
 	if (argc >= 2)
 	{
 		fd = open(argv[1], O_RDWR);
-		get_next_line(fd, &ptr);
+		i = get_next_line(fd, &ptr);
 			ft_putchar('|');
 			ft_putstr(ptr);
+			ft_putchar('-');
+			ft_putnbr(i);
 		ft_strdel(&ptr);
-		get_next_line(fd, &ptr);
+		i = get_next_line(fd, &ptr);
 			ft_putchar('|');
 			ft_putstr(ptr);
+			ft_putchar('-');
+			ft_putnbr(i);
 		ft_strdel(&ptr);
-		get_next_line(fd, &ptr);
+		i = get_next_line(fd, &ptr);
 			ft_putchar('|');
 			ft_putstr(ptr);
+			ft_putchar('-');
+			ft_putnbr(i);
+		ft_strdel(&ptr);
+		i = get_next_line(fd, &ptr);
+			ft_putchar('|');
+			ft_putchar('-');
+			ft_putnbr(i);
+		ft_strdel(&ptr);
+		i = get_next_line(fd, &ptr);
+			ft_putchar('|');
+			ft_putchar('-');
+			ft_putnbr(i);
+		ft_strdel(&ptr);
+		i = get_next_line(fd, &ptr);
+			ft_putchar('|');
+			ft_putchar('-');
+			ft_putnbr(i);
 		close(fd);
 		ft_strdel(&ptr);
 	}
